@@ -50,3 +50,8 @@ export class EditMemberDTO {
     editKey: string;
     editValue: string;
 }
+
+export class userDTO {
+    email: string;
+    password: string;
+}

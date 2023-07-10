@@ -1,5 +1,5 @@
-import { HttpStatus, Injectable, NotFoundException, Session } from "@nestjs/common";
-import { EditMemberDTO, MemberDTO } from "./member.dto";
+import { HttpStatus, Injectable, NotFoundException, Session, UnauthorizedException } from "@nestjs/common";
+import { EditMemberDTO, MemberDTO, userDTO } from "./member.dto";
 import { orderDTO } from "./order.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { MemberEntity } from "./member.entity";
@@ -27,6 +27,29 @@ export class MemberService{
         const salt = await bcrypt.genSalt();
         member.password = await bcrypt.hash(member.password, salt);
         return await this.memberRepository.save(member);
+    }
+
+    // Log in
+    async login(query:userDTO)
+    {
+        const email = query.email;
+        const password = query.password;
+        const memberDetails = await this.memberRepository.findOneBy({ email : email });        
+        if (memberDetails === null) {
+            throw new NotFoundException({
+                status: HttpStatus.NOT_FOUND,
+                message: "Member not found"
+            })
+        } else {
+            if (await bcrypt.compare(password, memberDetails.password)) {
+                return memberDetails;
+            } else {
+                throw new UnauthorizedException({
+                    status: HttpStatus.UNAUTHORIZED,
+                    message: "Password does not match"
+                })
+            }
+        }
     }
 
     // Show Profile Details
