@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MemberModule } from './member/member.module';
+import { SellerModule } from './Seller/seller.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { MemberEntity } from './member/member.entity';
 
 @Module({
-  imports: [MemberModule, TypeOrmModule.forRoot(
+  imports: [MemberModule, SellerModule, TypeOrmModule.forRoot(
     { type: 'postgres',
     host: 'localhost',
     port: 5432,
@@ -12,9 +16,9 @@ import { MemberModule } from './member/member.module';
     database: 'nature_nurtures',
     autoLoadEntities: true,
     synchronize: true,
-    } ),
+    } ), TypeOrmModule.forFeature([MemberEntity])
     ],
-  controllers: [],
-  providers: [],
+  controllers: [ AppController ],
+  providers: [ AppService ],
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { OrderEntity } from "./order.entity";
+import { SellerEntity } from "src/Seller/seller.entity";
 
 @Entity('member')
 export class MemberEntity {
@@ -35,4 +36,8 @@ export class MemberEntity {
 
     @OneToMany(() => OrderEntity, order => order.member)
     orders: OrderEntity[];
+
+    @OneToOne(() => SellerEntity, seller => seller.member)
+    @JoinColumn()
+    seller: SellerEntity;
 }

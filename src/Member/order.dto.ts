@@ -17,8 +17,8 @@ export class orderDTO {
     products: string;
 
     @IsNotEmpty({ message: "😓 Total amount should not be empty 😓" })
-    @IsString({ message: "😓 Total amount must be a string 😓" })
-    totalAmount: string;
+    @IsString({ message: "😓 Total amount must be a number 😓" })
+    totalAmount: number;
 
     @IsNotEmpty({ message: "😓 Shipping address should not be empty 😓" })
     @IsString({ message: "😓 Shipping address must be a string 😓" })

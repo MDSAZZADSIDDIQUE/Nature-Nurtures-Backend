@@ -8,8 +8,8 @@ export class productDTO {
     productName: string;
 
     @IsNotEmpty({ message: "😓 Price should not be empty 😓" })
-    @IsString({ message: "😓 Price must be a string 😓" })
-    price: string;
+    @IsString({ message: "😓 Price must be a number 😓" })
+    price: number;
 
     @IsNotEmpty({ message: "😓 Product name should not be empty 😓" })
     @IsString({ message: "😓 Product name must be a string 😓" })

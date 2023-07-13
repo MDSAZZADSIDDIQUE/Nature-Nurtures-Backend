@@ -1,5 +1,5 @@
 import { Transform } from "class-transformer";
-import { IsDateString, IsNotEmpty, IsString, Matches, MaxLength, MinLength, IsEmail, IsDate, IsPhoneNumber } from "class-validator";
+import { IsNotEmpty, IsString, Matches, MaxLength, MinLength, IsEmail, IsDate, IsPhoneNumber } from "class-validator";
 
 export class MemberDTO {
     @IsNotEmpty({ message: "😓 First name should not be empty 😓" })

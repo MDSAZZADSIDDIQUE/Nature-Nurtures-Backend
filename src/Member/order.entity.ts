@@ -10,7 +10,7 @@ export class OrderEntity {
     customerID: number;
 
     @Column( { name: 'order_date', type: 'varchar', length: 255 } )
-    orderDate: string;
+    orderDate: Date;
 
     @Column( { name: 'order_status', type: 'varchar', length: 255 } )
     orderStatus: string;
@@ -18,8 +18,8 @@ export class OrderEntity {
     @Column( { name: 'products', type: 'varchar', length: 255 } )
     products: string;
 
-    @Column( { name: 'total_amount', type: 'varchar', length: 255 } )
-    totalAmount: string;
+    @Column( { name: 'total_amount', type: 'money'} )
+    totalAmount: number;
 
     @Column( { name: 'shipping_address', type: 'varchar', length: 255 } )
     shippingAddress: string;
